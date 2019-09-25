@@ -18,7 +18,4 @@ from django.urls import path, include
 
 urlpatterns = [
     path('app_dairyform/', include('app_dairyform.urls')),
-    path('app_dairyform/', include('app_dairyform.urls')),
-    path('register/', include('app_dairyform.urls')),
-
 ]
