@@ -6,6 +6,7 @@ GENDER_CHOICES = (
     ('M', 'Male'),
 )
 
+
 class Farmer(models.Model):
     Name = models.CharField(max_length=100)
     Gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Female')
