@@ -18,7 +18,7 @@ class FarmerFormView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        #raise NameError(request.__dict__)
+        # raise NameError(request.__dict__)
         # raise NameError(request.POST['Name'])
         option=request.POST['operation']
         if option == 'create':
