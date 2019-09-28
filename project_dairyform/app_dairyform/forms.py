@@ -4,4 +4,4 @@ from .models import Farmer
 class FarmerForm(ModelForm):
     class Meta:
         model = Farmer
-        fields = ['Name' , 'Gender' , 'ContactNumber', 'Age']
+        fields = ['Name', 'Gender', 'ContactNumber', 'Age']

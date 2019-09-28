@@ -12,4 +12,3 @@ class Farmer(models.Model):
     Gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Female')
     ContactNumber = models.CharField(max_length=10)
     Age = models.IntegerField(default=0)
-
