@@ -21,7 +21,7 @@ class FarmerFormView(View):
         #raise NameError(request.__dict__)
         # raise NameError(request.POST['Name'])
         option=request.POST['operation']
-        if option == 'edit':
+        if option == 'create':
             query = request.POST
             name = query['name']
             gender = query['gender']
@@ -29,6 +29,10 @@ class FarmerFormView(View):
             age=query['age']
             model = Farmer.objects.create(Name= name, Gender=gender, ContactNumber=phone_number, Age=age)
             return render(request, self.template_post_name)
+
+        elif option == 'edit':
+
+
 
 
 def home(request):
