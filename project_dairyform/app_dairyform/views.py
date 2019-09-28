@@ -19,13 +19,14 @@ class FarmerFormView(View):
 
     def post(self, request, *args, **kwargs):
         #raise NameError(request.__dict__)
-        raise NameError(request.POST['Name'])
+        # raise NameError(request.POST['Name'])
         query = request.POST
-        name = query['Name']
-        gender = query['Gender']
-        phone_number = query['ContactNumber']
-        model = Farmer.objects.create(Name= name, Gender= gender, ContactNumber= phone_number)
+        name = query['name']
+        gender = query['gender']
+        phone_number = query['contact_number']
+        age=query['age']
+        model = Farmer.objects.create(Name= name, Gender=gender, ContactNumber=phone_number, Age=age)
         print(model)
-        return HttpResponseRedirect('self.template_post_name')
+        # return HttpResponseRedirect('self.template_post_name')
 
-        #return render(request, self.template_post_name, {'form': form})
+        return render(request, self.template_post_name, {'form': model})
