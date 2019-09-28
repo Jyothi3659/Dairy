@@ -10,3 +10,4 @@ urlpatterns = [
     path('',views.response),
     # path('', views.FarmerFormView.as_view(), name='FarmerFormView'),
 ]
+
