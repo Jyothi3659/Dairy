@@ -1,18 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Farmer registration</title>
+<script>
+function myFunction(type) {
+  document.getElementById("header").innerHTML = "Paragraph changed.";
+  console.log(document.getElementById("operation"));
+  document.getElementById("operation").value = type;
+
+  var formObj = document.getElementById("myform");
+  formObj.action = "app_dairyform/";
+  formObj.method = "POST";
+  formObj.submit();
+}
+</script>
 </head>
 <body>
-<form action="app_dairyform/" method="POST">
+<h1 id="header">Farmer Registration</h1>
+<form id="myform">
     {% csrf_token %}
+    <input type="hidden" id="operation" name="operation"/>
     <input type="text" name="name" />
     <input type="radio" name="gender" value="male" checked /> Male<br>
     <input type="radio" name="gender" value="female" /> Female<br>
     <input type="text" name="contact_number" />
     <input type="text" name="age" />
-    <input type="submit" value="create">
+
+    <button type="button" onclick="myFunction('edit')">edit</button>
+    <button type="button" onclick="myFunction('create')">create</button>
+    <button type="button" onclick="myFunction('delete')">delete</button>
+
 </form>
+
 </body>
 </html>
