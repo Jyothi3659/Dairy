@@ -5,6 +5,8 @@ from .forms import FarmerForm
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Farmer
+from django.core.mail import send_mail
+# from twilio.rest import TwilioRestClient
 
 
 class FarmerFormView(View):
@@ -18,8 +20,8 @@ class FarmerFormView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        # raise NameError(request.__dict__)
-        # raise NameError(request.POST['Name'])
+        #raise NameError(request.__dict__)
+        #raise NameError(request.POST['Name'])
         option=request.POST['operation']
         if option == 'edit':
             query = request.POST
@@ -40,8 +42,13 @@ def about(request):
 
 
 def email(request):
-    return render(request,'app_dairyform/email.html')
-
-
-def response(request):
+    message = 'hi'
+    subject = 'thank you'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['yedla.jyothi95@gmail.com']
+    send_mail(subject, message, email_from, recipient_list)
     return render(request,'app_dairyform/response.html')
+
+
+# def response(request):
+#     return render(request,'app_dairyform/response.html')
