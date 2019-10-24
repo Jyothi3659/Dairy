@@ -9,5 +9,6 @@ urlpatterns = [
     path('543/',views.email),
     path('',views.response),
     path('app_dairyform/app_dairyform/', views.FarmerFormView.as_view(), name='FarmerFormView'),
+    path('app_dairyform/app_dairyform/app_dairyform', views.FarmerFormView.as_view(), name='FarmerFormView'),
     # path('', views.FarmerFormView.as_view(), name='FarmerFormView'),
 ]

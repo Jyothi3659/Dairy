@@ -53,7 +53,6 @@ var radios = document.getElementsByName("choice");
     {%for each in farmers%}
 <tr>
     <td><input type="radio" name="choice" id="choice{{ each.id }}" value="{{each.id}}"></td>
-
     <td>{{each.FirstName}}</td>
     <td>{{each.LastName}}</td>
     <td>{{each.Gender}}</td>
@@ -74,7 +73,7 @@ var radios = document.getElementsByName("choice");
     <th>ContactNumber</th>
     <th>Age</th>
 </tr>
-    {%for each in farmers%}
+    {%for each in farmer%}
 <tr>
     <td>{{each.FirstName}}</td>
     <td>{{each.LastName}}</td>
@@ -85,17 +84,40 @@ var radios = document.getElementsByName("choice");
  {%endfor%}
 </table>
     {% elif update %}
-     <label for="FirstName"><b>FirstName</b></label>
+    <input type="hidden" id="updateid{{farm.id}}" name="updateid" value="{{farm.id}}"/>
+    <label for="FirstName"><b>FirstName</b></label>
     <input type="text" name="firstname" value={{farm.FirstName}} />
     <label for="LastName"><b>LastName</b></label>
     <input type="text" name="lastname" value={{farm.LastName}}/>
     <label for="gender"><b>Gender</b></label>
     <input type="radio" name="gender" value={{farm.Gender}} checked /> Male<br>
+    <input type="radio" name="gender" value="female" /> Female<br>
     <label for="Contactnumber"><b>ContactNumber</b></label>
     <input type="text" name="contact_number" value={{farm.ContactNumber}} />
     <label for="Age"><b>Age</b></label>
     <input type="text" name="age" value={{farm.Age}} />
     <button type="button" onclick="myFunction('save')">save</button>
+
+    {% elif save %}
+<table>
+<tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Gender</th>
+    <th>ContactNumber</th>
+    <th>Age</th>
+</tr>
+    {%for each in value%}
+<tr>
+
+    <td>{{each.FirstName}}</td>
+    <td>{{each.LastName}}</td>
+    <td>{{each.Gender}}</td>
+    <td>{{each.ContactNumber}}</td>
+    <td>{{each.Age}}</td>
+</tr>
+    {% endfor %}
+</table>
 
     {%else%}
 

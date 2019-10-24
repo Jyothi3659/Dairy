@@ -34,45 +34,48 @@ class FarmerFormView(View):
             return render(request, self.template_name, {'create': True, 'farmers': farmers})
 
         elif option == 'update':
+            # raise NameError(request.__dict__)
             id = request.POST['choice']
             farm = Farmer.objects.get(pk=id)
+            farm.save()
             # farmers = Farmer.objects.all()
             return render(request, self.template_name, {'update': True, 'farm': farm})
 
+        elif option == 'save':
+            id = request.POST['updateid']
+            # raise NameError(request.__dict__)
+            field = Farmer.objects.get(pk=id)
+            query = request.POST
+            field.FirstName = query.get('firstname')
+            field.LastName = query.get('lastname')
+            field.Gender = query.get('gender')
+            field.ContactNumber = query.get('contact_number')
+            field.Age =  query.get('age')
+            field.save()
+            #model = Farmer.objects.save(FirstName=firstname, LastName=lastname, Gender=gender, ContactNumber=phone_number, Age=age)
+            value=Farmer.objects.all()
+            return render(request, self.template_name, {'save': True, 'value':value})
 
-        else:
+        else :
             # raise NameError(request.__dict__)
             id = request.POST['choice']
             farm = Farmer.objects.get(pk=id)
             farmer = Farmer.objects.all()
             farm.delete()
-            return render(request, self.template_name, {'create': True, 'farmer': farmer})
+            return render(request, self.template_name, {'delete': True, 'farmer': farmer})
+
 
 def home(request):
     return render(request,'app_dairyform/home.html')
 
+
 def about(request):
     return render(request,'app_dairyform/about.html')
+
 
 def email(request):
     return render(request,'app_dairyform/email.html')
 
+
 def response(request):
     return render(request,'app_dairyform/response.html')
-
-
-
-
-
-
-
-
-
-  # def update(request, id):
-  #               emp = Employee.objects.get(pk=id)
-  #               # you can do this for as many fields as you like
-  #               # here I asume you had a form with input like <input type="text" name="name"/>
-  #               # so it's basically like that for all form fields
-  #               emp.name = request.POST.get('name')
-  #               emp.save()
-  #               return HttpResponse('updated')
