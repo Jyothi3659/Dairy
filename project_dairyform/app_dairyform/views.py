@@ -24,13 +24,49 @@ class FarmerFormView(View):
         #raise NameError(request.POST['Name'])
         option=request.POST['operation']
         if option == 'edit':
+            option = request.POST['operation']
+        if option == 'create':
             query = request.POST
-            name = query['name']
+            firstname = query['firstname']
+            lastname = query['lastname']
             gender = query['gender']
             phone_number = query['contact_number']
             age=query['age']
-            model = Farmer.objects.create(Name= name, Gender=gender, ContactNumber=phone_number, Age=age)
-            return render(request, self.template_post_name)
+            model = Farmer.objects.create(FirstName = firstname, LastName = lastname, Gender=gender, ContactNumber=phone_number, Age=age)
+            farmers=Farmer.objects.all()
+            # model_obj = {'id': model.id, 'FirstName': model.FirstName}
+            return render(request, self.template_name, {'create': True, 'farmers': farmers})
+
+        elif option == 'update':
+            # raise NameError(request.__dict__)
+            id = request.POST['choice']
+            farm = Farmer.objects.get(pk=id)
+            farm.save()
+            # farmers = Farmer.objects.all()
+            return render(request, self.template_name, {'update': True, 'farm': farm})
+
+        elif option == 'save':
+            id = request.POST['updateid']
+            # raise NameError(request.__dict__)
+            field = Farmer.objects.get(pk=id)
+            query = request.POST
+            field.FirstName = query.get('firstname')
+            field.LastName = query.get('lastname')
+            field.Gender = query.get('gender')
+            field.ContactNumber = query.get('contact_number')
+            field.Age =  query.get('age')
+            field.save()
+            #model = Farmer.objects.save(FirstName=firstname, LastName=lastname, Gender=gender, ContactNumber=phone_number, Age=age)
+            value=Farmer.objects.all()
+            return render(request, self.template_name, {'save': True, 'value':value})
+
+        else :
+            # raise NameError(request.__dict__)
+            id = request.POST['choice']
+            farm = Farmer.objects.get(pk=id)
+            farmer = Farmer.objects.all()
+            farm.delete()
+            return render(request, self.template_name, {'delete': True, 'farmer': farmer})
 
 
 def home(request):
@@ -50,5 +86,5 @@ def email(request):
     return render(request,'app_dairyform/response.html')
 
 
-# def response(request):
-#     return render(request,'app_dairyform/response.html')
+def response(request):
+    return render(request,'app_dairyform/response.html')

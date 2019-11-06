@@ -3,9 +3,17 @@
 
 <head>
 <script>
+
+
 function myFunction(type) {
+
   document.getElementById("header").innerHTML = "Paragraph changed.";
   console.log(document.getElementById("operation"));
+  if (type === 'delete'){
+  if (!validate()) {
+    return false;
+  }
+  }
   document.getElementById("operation").value = type;
 
   var formObj = document.getElementById("myform");
@@ -13,23 +21,123 @@ function myFunction(type) {
   formObj.method = "POST";
   formObj.submit();
 }
+function validate() {
+var radios = document.getElementsByName("choice");
+    var formValid = false;
+
+    var i = 0;
+    while (!formValid && i < radios.length) {
+        if (radios[i].checked) formValid = true;
+        i++;
+    }
+
+    if (!formValid) alert("Must check some option!");
+    return formValid;
+}
 </script>
 </head>
 <body>
 <h1 id="header">Farmer Registration</h1>
 <form id="myform">
     {% csrf_token %}
-    <input type="hidden" id="operation" name="operation"/>
-    <input type="text" name="name" />
+ <input type="hidden" id="operation" name="operation"/>
+{% if create %}
+<table>
+<tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Gender</th>
+    <th>ContactNumber</th>
+    <th>Age</th>
+</tr>
+    {%for each in farmers%}
+<tr>
+    <td><input type="radio" name="choice" id="choice{{ each.id }}" value="{{each.id}}"></td>
+    <td>{{each.FirstName}}</td>
+    <td>{{each.LastName}}</td>
+    <td>{{each.Gender}}</td>
+    <td>{{each.ContactNumber}}</td>
+    <td>{{each.Age}}</td>
+
+</tr>
+ {%endfor%}
+</table>
+    <button type="button" onclick="myFunction('delete')">delete</button>
+    <button type="button" onclick="myFunction('update')">update</button>
+    {% elif delete %}
+<table>
+<tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Gender</th>
+    <th>ContactNumber</th>
+    <th>Age</th>
+</tr>
+    {%for each in farmer%}
+<tr>
+    <td>{{each.FirstName}}</td>
+    <td>{{each.LastName}}</td>
+    <td>{{each.Gender}}</td>
+    <td>{{each.ContactNumber}}</td>
+    <td>{{each.Age}}</td>
+</tr>
+ {%endfor%}
+</table>
+    {% elif update %}
+    <input type="hidden" id="updateid{{farm.id}}" name="updateid" value="{{farm.id}}"/>
+    <label for="FirstName"><b>FirstName</b></label>
+    <input type="text" name="firstname" value={{farm.FirstName}} />
+    <label for="LastName"><b>LastName</b></label>
+    <input type="text" name="lastname" value={{farm.LastName}}/>
+    <label for="gender"><b>Gender</b></label>
+    <input type="radio" name="gender" value={{farm.Gender}} checked /> Male<br>
+    <input type="radio" name="gender" value="female" /> Female<br>
+    <label for="Contactnumber"><b>ContactNumber</b></label>
+    <input type="text" name="contact_number" value={{farm.ContactNumber}} />
+    <label for="Age"><b>Age</b></label>
+    <input type="text" name="age" value={{farm.Age}} />
+    <button type="button" onclick="myFunction('save')">save</button>
+
+    {% elif save %}
+<table>
+<tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Gender</th>
+    <th>ContactNumber</th>
+    <th>Age</th>
+</tr>
+    {%for each in value%}
+<tr>
+
+    <td>{{each.FirstName}}</td>
+    <td>{{each.LastName}}</td>
+    <td>{{each.Gender}}</td>
+    <td>{{each.ContactNumber}}</td>
+    <td>{{each.Age}}</td>
+</tr>
+    {% endfor %}
+</table>
+
+    {%else%}
+
+    <label for="FirstName"><b>FirstName</b></label>
+    <input type="text" name="firstname" />
+    <label for="LastName"><b>LastName</b></label>
+    <input type="text" name="lastname" />
+    <label for="gender"><b>Gender</b></label>
     <input type="radio" name="gender" value="male" checked /> Male<br>
     <input type="radio" name="gender" value="female" /> Female<br>
+    <label for="Contactnumber"><b>ContactNumber</b></label>
     <input type="text" name="contact_number" />
+    <label for="Age"><b>Age</b></label>
     <input type="text" name="age" />
 
-    <button type="button" onclick="myFunction('edit')">edit</button>
-    <button type="button" onclick="myFunction('create')">create</button>
-    <button type="button" onclick="myFunction('delete')">delete</button>
 
+    <button type="button" onclick="myFunction('create')">create</button>
+<!--    <button type="button" onclick="myFunction('delete')">delete</button>-->
+
+    {%endif%}
 </form>
 
 </body>
