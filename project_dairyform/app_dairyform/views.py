@@ -56,7 +56,7 @@ class FarmerFormView(View):
             field.ContactNumber = query.get('contact_number')
             field.Age =  query.get('age')
             field.save()
-            #model = Farmer.objects.save(FirstName=firstname, LastName=lastname, Gender=gender, ContactNumber=phone_number, Age=age)
+            # model = Farmer.objects.save(FirstName=firstname, LastName=lastname, Gender=gender, ContactNumber=phone_number, Age=age)
             value=Farmer.objects.all()
             return render(request, self.template_name, {'save': True, 'value':value})
 
@@ -88,3 +88,6 @@ def email(request):
 
 def response(request):
     return render(request,'app_dairyform/response.html')
+
+def home1(request):
+    return render(request,'app_dairyform/home.html')

@@ -10,4 +10,5 @@ urlpatterns = [
     path('about/',include('app_dairyform.urls')),
     path('email us/',include('app_dairyform.urls')),
     path('app_dairyform/app_dairyform/', include('app_dairyform.urls')),
+    path('Dairy Farm/',include('app_dairyform.urls')),
 ]

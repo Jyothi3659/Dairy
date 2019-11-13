@@ -1,10 +1,32 @@
  <!DOCTYPE html>
 <html>
-
 <head>
-<script>
+    <title>home</title>
+  {% load staticfiles %}
+  <title>Dairy Farm</title>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+</head>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="home_name/">Dairy Farm</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="123/">about</a>
+          <a class="nav-item nav-link" href="543/">email us</a>
+          <a class="nav-item nav-link" href="app_dairyform/">registration</a>
+          <a class="nav-item nav-link" href="">info</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <script>
 function myFunction(type) {
 
   document.getElementById("header").innerHTML = "Paragraph changed.";
@@ -35,7 +57,6 @@ var radios = document.getElementsByName("choice");
     return formValid;
 }
 </script>
-</head>
 <body>
 <h1 id="header">Farmer Registration</h1>
 <form id="myform">
